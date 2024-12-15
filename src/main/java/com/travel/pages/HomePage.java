@@ -18,6 +18,9 @@ public class HomePage extends BasePage {
     @FindBy(css = ".mega-menu__main-link")
     List<WebElement> menuLinks;
 
+    @FindBy(css = "ul.footer-social-logos a")
+    List<WebElement> socialLinks;
+
 
     public HomePage() {
         super();
@@ -49,10 +52,16 @@ public class HomePage extends BasePage {
     }
 
     public void navigateToOption(String optionName) {
-        WebElement ele = menuLinks.stream().filter(e->e.getText().equalsIgnoreCase(optionName)).findFirst().orElse(null);
+        WebElement ele = menuLinks.stream().filter(e -> e.getText().equalsIgnoreCase(optionName)).findFirst().orElse(null);
         wait.until(elementToBeClickable(ele));
         assert ele != null;
         ele.click();
         pause(2);
+    }
+
+    public String getSocialLink(String socialMediaName) {
+        return socialLinks.stream().map(e -> e.getAttribute("href"))
+                                    .filter(s -> s.contains(socialMediaName))
+                                    .findFirst().orElse(null);
     }
 }

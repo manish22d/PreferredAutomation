@@ -10,10 +10,10 @@ public final class WebDriverManager {
 	static WebDriver driver = null;
 
 	public static void initializeWebDriver(){
-		System.out.println("initialising Web driver....");
-		WebDriverFactory wf= new WebDriverFactory();
-		driver = wf.initializeDriver();
-		driver.manage().window().maximize();
+			System.out.println("initialising Web driver....");
+			WebDriverFactory wf= new WebDriverFactory();
+			driver = wf.initializeDriver();
+			driver.manage().window().maximize();
 	}
 	public static WebDriver getDriver() {
 		if(driver==null) {

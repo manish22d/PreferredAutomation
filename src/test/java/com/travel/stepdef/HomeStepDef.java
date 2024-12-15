@@ -53,4 +53,16 @@ public class HomeStepDef {
         homePage.openMenuOptions().navigateToOption(optionName);
 
     }
+
+    @And("user want something")
+    public void userWantSomething() {
+
+    }
+
+    @Then("user wants to verify {string} link is correct")
+    public void userWantsToVerifyLinkIsCorrect(String socialMediaName) {
+        String url = homePage.getSocialLink(socialMediaName);
+        System.out.println("verifying -> "+url);
+        Assert.assertTrue(url.endsWith("PreferredHotels"));
+    }
 }
