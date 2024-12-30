@@ -53,15 +53,15 @@ public class HomePage extends BasePage {
 
     public void navigateToOption(String optionName) {
         WebElement ele = menuLinks.stream().filter(e -> e.getText().equalsIgnoreCase(optionName)).findFirst().orElse(null);
-        wait.until(elementToBeClickable(ele));
+
         assert ele != null;
-        ele.click();
+        highlightAndClick(ele);
         pause(2);
     }
 
     public String getSocialLink(String socialMediaName) {
         return socialLinks.stream().map(e -> e.getAttribute("href"))
-                                    .filter(s -> s.contains(socialMediaName))
-                                    .findFirst().orElse(null);
+                .filter(s -> s.contains(socialMediaName))
+                .findFirst().orElse(null);
     }
 }
