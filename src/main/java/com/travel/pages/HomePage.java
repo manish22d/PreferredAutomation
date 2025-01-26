@@ -1,5 +1,6 @@
 package com.travel.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -17,6 +18,8 @@ public class HomePage extends BasePage {
 
     @FindBy(css = ".mega-menu__main-link")
     List<WebElement> menuLinks;
+    @FindBy(css = "div.mega-menu__sub-link a")
+    List<WebElement> subMenuLinks;
 
     @FindBy(css = "ul.footer-social-logos a")
     List<WebElement> socialLinks;
@@ -29,6 +32,8 @@ public class HomePage extends BasePage {
     public HomePage launchApplication() {
         driver.navigate().to(property.getProperty("app.url"));
         waitForPageToLoad();
+        WebElement acceptBtn = driver.findElement(By.cssSelector("#onetrust-accept-btn-handler"));
+        highlightAndClick(acceptBtn);
         return this;
     }
 
@@ -51,8 +56,23 @@ public class HomePage extends BasePage {
         return menuLinks.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
+    public BasePage navigateToPage(String pageName) {
+        WebElement page = menuLinks.stream().filter(ele -> ele.getText().equalsIgnoreCase(pageName)).findFirst().orElse(null);
+        assert page != null;
+        highlightAndClick(page);
+        return new TimeLinePage();
+    }
+
     public void navigateToOption(String optionName) {
         WebElement ele = menuLinks.stream().filter(e -> e.getText().equalsIgnoreCase(optionName)).findFirst().orElse(null);
+
+        assert ele != null;
+        highlightAndClick(ele);
+        pause(2);
+    }
+
+    public void navigateToSubMenu(String subMenuName) {
+        WebElement ele = subMenuLinks.stream().filter(e -> e.getText().equalsIgnoreCase(subMenuName)).findFirst().orElse(null);
 
         assert ele != null;
         highlightAndClick(ele);
@@ -64,4 +84,6 @@ public class HomePage extends BasePage {
                 .filter(s -> s.contains(socialMediaName))
                 .findFirst().orElse(null);
     }
+
+
 }

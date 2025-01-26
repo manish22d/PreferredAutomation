@@ -51,7 +51,6 @@ public class WebActions {
     }
 
     public WebElement moveToElement(WebElement ele) {
-        pause(2);
         actions.moveToElement(ele).build().perform();
         return ele;
     }
@@ -79,13 +78,13 @@ public class WebActions {
 
     public void fillText(WebElement ele, String txt) {
         String originalStyle = ele.getAttribute("style");
-        setAttribute(ele,
+        setAttributeStyle(ele,
                 "color: yellow; border: 5px solid blue; background-color: yellow;");
         moveToElement(ele).clear();
         wait.until(visibilityOf(ele));
         pause(1);
         ele.sendKeys(txt);
-        setAttribute(ele, originalStyle);
+        setAttributeStyle(ele, originalStyle);
     }
 
     public void fillTextAndSelectResult(WebElement ele, String txt) {
@@ -96,21 +95,32 @@ public class WebActions {
     }
 
     public void highlightAndClick(WebElement ele) {
-        String originalStyle = ele.getAttribute("style");
-        setAttribute(ele,
-                "border: 5px solid blue;");
-        moveToElement(ele).clear();
         wait.until(elementToBeClickable(ele));
-        pause(1);
+        highlightAndReset(ele);
         ele.click();
-//        setAttribute(ele, originalStyle);
-
     }
 
-    private void setAttribute(WebElement element, String value) {
+    public void highlightAndReset(WebElement ele) {
+        String originalStyle = ele.getAttribute("style");
+        moveToElement(ele);
+        setAttributeStyle(ele,
+                "border: 5px solid blue;");
+        pause(1);
+        setAttributeStyle(ele, originalStyle);
+    }
+
+    private void setAttributeStyle(WebElement element, String value) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].setAttribute('style', '" + value + "')", element);
     }
 
+    public void highlightAndFillText(WebElement ele, String text) {
+        String originalStyle = ele.getAttribute("style");
+        setAttributeStyle(ele,
+                "color: yellow; border: 5px solid blue; background-color: yellow;");
+        moveToElement(ele);
+        setAttributeStyle(ele, originalStyle);
+        ele.sendKeys(text);
+    }
 
 }

@@ -60,6 +60,7 @@ public class WebDriverFactory {
 		chromeOptions.setCapability("unhandledPromptBehavior", "accept");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);
 		chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+		chromeOptions.addArguments("--disable-notifications");
 		Map<String, Object> prefs = new HashMap<String, Object>();
 		prefs.put("credentials_enable_service", false);
 		prefs.put("profile.password_manager_enabled", false);

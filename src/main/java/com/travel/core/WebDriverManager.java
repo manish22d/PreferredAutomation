@@ -14,6 +14,7 @@ public final class WebDriverManager {
 			WebDriverFactory wf= new WebDriverFactory();
 			driver = wf.initializeDriver();
 			driver.manage().window().maximize();
+
 	}
 	public static WebDriver getDriver() {
 		if(driver==null) {
