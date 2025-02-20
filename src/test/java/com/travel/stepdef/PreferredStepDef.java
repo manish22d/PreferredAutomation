@@ -25,6 +25,9 @@ public class PreferredStepDef {
     public PressCenter pressCenter;
 
     public ExecutiveProfilesPage executiveProfilesPage;
+    public AboutUsPage aboutUsPage;
+    public AlliancePartnerPage alliancePartnerPage;
+    public TermOfUsePage termOfUsePage;
 
     @Given("user launch's preferred travel application")
     public void userLaunchsPreferredTravelApplication() {
@@ -171,6 +174,7 @@ public class PreferredStepDef {
         Assert.assertFalse(pressCenter.getPageSubHeader().isEmpty());
 
     }
+
     @And("verify press center card {string} is present")
     public void verifyPressCenterCardIsPresent(String cardLink) {
         Assert.assertTrue(pressCenter.isCardAvailable(cardLink));
@@ -178,10 +182,9 @@ public class PreferredStepDef {
 
     @Then("user click on {string} card")
     public void userClickOnCard(String cardLink) {
-        PressCenter pressCenter=new PressCenter();
+        PressCenter pressCenter = new PressCenter();
         pressCenter.navigateToCard(cardLink);
     }
-
 
 
     @And("click on random article link on in the news page")
@@ -225,5 +228,43 @@ public class PreferredStepDef {
     @And("navigate back to original page")
     public void navigateBackToOriginalPage() {
         WebDriverManager.getDriver().navigate().back();
+    }
+
+    @And("verify Alliance partner page heading displayed correctly")
+    public void verifyAlliancePartnerPageHeadingDisplayedCorrectly() {
+        alliancePartnerPage = new AlliancePartnerPage();
+        String header = alliancePartnerPage.getHeader();
+        Assert.assertFalse(header.isEmpty());
+    }
+
+    @And("verify Alliance partner page body displayed correctly")
+    public void verifyAlliancePartnerPageBodyDisplayedCorrectly() {
+        alliancePartnerPage = new AlliancePartnerPage();
+        String body = alliancePartnerPage.getBody();
+        Assert.assertFalse(body.isEmpty());
+    }
+
+    @And("verify content list is available in term of use page")
+    public void verifyContentListIsAvailableInTermOfUsePage() {
+        List<String> content = termOfUsePage.getContentList();
+        Assert.assertFalse(content.isEmpty());
+    }
+
+    @And("verify term of use page header displayed correctly")
+    public void verifyTermOfUsePageHeaderDisplayedCorrectly() {
+        termOfUsePage= new TermOfUsePage();
+        String heading = termOfUsePage.getHeading();
+        Assert.assertFalse(heading.isEmpty());
+    }
+
+    @And("Verify about us page heading displayed correctly")
+    public void verifyAboutUsPageHeadingDisplayedCorrectly() {
+        aboutUsPage=new AboutUsPage();
+        Assert.assertFalse(aboutUsPage.getHeader().isEmpty());
+    }
+
+    @And("verify about us page mission statement displayed correctly")
+    public void verifyAboutUsPageMissionStatementDisplayedCorrectly() {
+        Assert.assertFalse(aboutUsPage.getMissionStatement().isEmpty());
     }
 }
