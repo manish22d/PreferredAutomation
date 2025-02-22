@@ -4,7 +4,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 import com.travel.core.WebDriverManager;
-import com.travel.pages.*;
+import com.travel.pages.ptg.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,9 +21,7 @@ public class PreferredStepDef {
     public TimeLinePage timeLinePage;
     public ContactUsPage contactUsPage;
     public CareerPage careerPage;
-
     public PressCenter pressCenter;
-
     public ExecutiveProfilesPage executiveProfilesPage;
     public AboutUsPage aboutUsPage;
     public AlliancePartnerPage alliancePartnerPage;

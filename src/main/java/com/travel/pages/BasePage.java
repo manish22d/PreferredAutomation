@@ -4,6 +4,7 @@ package com.travel.pages;
 import com.travel.core.WebActions;
 import com.travel.core.WebDriverManager;
 import com.travel.utils.PropertyUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -13,10 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.Properties;
-
+@Slf4j
 public class BasePage extends WebActions {
 
-    public static final Logger logger = LoggerFactory.getLogger(BasePage.class);
     public WebDriver driver;
     public WebDriverWait wait;
     public Properties property;

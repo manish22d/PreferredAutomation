@@ -25,6 +25,5 @@ public class Hook {
             ExtentCucumberAdapter.getCurrentStep().log(Status.INFO, "screenshot", MediaEntityBuilder.createScreenCaptureFromBase64String(((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64)).build());
         }
         WebDriverManager.shutdownDriver();
-
     }
 }
